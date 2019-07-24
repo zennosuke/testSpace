@@ -5,28 +5,32 @@ import browserSync from 'browser-sync';
 import notify from 'gulp-notify';
 import plumber from 'gulp-plumber';
 
-gulp.task('build', function(){
+gulp.task('build', function(done){
   gulp.src('src/js/app.js')
     .pipe(plumber({
       errorHandler: notify.onError("Error: <%= error.message %>")
     }))
     .pipe(webpack(webpackConfig))
     .pipe(gulp.dest('dist/js'));
+    done();
 });
-gulp.task('browser-sync', function(){
+gulp.task('browser-sync', function(done){
   browserSync.init({
     server: {
       baseDir: "./",
       index: "index.html"
     }
   });
+  done();
 });
-gulp.task('bs-reload', function(){
+gulp.task('bs-reload', function(done){
   browserSync.reload();
+  done();
 });
 
-gulp.task('default', ['build', 'browser-sync'], function(){
-  gulp.watch('./src/*/*.js', ['build']);
-  gulp.watch('./*.html', ['bs-reload']);
-  gulp.watch('./dist/*/*.+(js|css)', ['bs-reload']);
+gulp.task('default', gulp.series('build', 'browser-sync'), function(done){
+  gulp.watch('./src/*/*.js', gulp.task('build'));
+  gulp.watch('./*.html', gulp.task('bs-reload'));
+  gulp.watch('./dist/*/*.+(js|css)', gulp.task('bs-reload'));
+  done();
 });
