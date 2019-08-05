@@ -7,3 +7,4 @@ ReactDOM.render(
 );
 
 // babel-loaderをver7で入れたらいい感じになった
+// コメントを追加してみた
