@@ -76,9 +76,47 @@ class Clock2 extends React.Component {
     );
   }
 }
-
 ReactDOM.render(
   <Clock2 />,
   document.getElementById('app5')
 );
 
+// sample06  life cycle
+class Clock3 extends React.Component {
+  constructor(props) {
+    console.log('constructor');
+    super(props);
+    this.state = {date: new Date()};
+  }
+
+  componentWillMount() {
+    console.log('conponentWillMount');
+  }
+  componentDidMount() {
+    console.log('conponentDidMount');
+    this.timerID = setInterval(
+      () => this.tick(),
+      1000
+    );
+  }
+
+  tick() {
+    console.log('tick');
+    this.setState({
+      date: new Date()
+    });
+  }
+  render() {
+    console.log('render');
+    return (
+      <div>
+        <h1>Hello, world</h1>
+        <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
+      </div>
+    );
+  }
+}
+const clock3 = ReactDOM.render(
+  <Clock3 />,
+  document.getElementById('app6')
+);
