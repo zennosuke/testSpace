@@ -21,7 +21,7 @@
     "babel-preset-react": "^6.24.1",
     "browser-sync": "^2.18.13",
     "browserify": "^14.5.0",
-    "gulp": "^3.9.1",
+    "gulp": "^4.0.2",
     "gulp-notify": "^3.0.0",
     "gulp-plumber": "^1.1.0",
     "gulp-webpack": "^1.5.0",
